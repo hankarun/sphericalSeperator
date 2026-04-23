@@ -1,0 +1,4 @@
+[env]
+# Point ffmpeg-next to the Homebrew-installed ffmpeg on macOS Apple Silicon.
+# On Windows, set FFMPEG_DIR to your ffmpeg build directory (e.g. C:\ffmpeg).
+FFMPEG_DIR = "/opt/homebrew/Cellar/ffmpeg/8.1"

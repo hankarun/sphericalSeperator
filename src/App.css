@@ -1,0 +1,676 @@
+/* App.css — dark theme layout */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #111;
+  color: #e0e0e0;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-size: 13px;
+  overflow: hidden;
+  user-select: none;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* ── Top toolbar ──────────────────────────────── */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  background: #1a1a1a;
+  border-bottom: 1px solid #2a2a2a;
+  flex-shrink: 0;
+  height: 48px;
+}
+
+.toolbar h1 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  margin-right: 8px;
+}
+
+.btn {
+  padding: 5px 14px;
+  border-radius: 4px;
+  border: 1px solid #444;
+  background: #2a2a2a;
+  color: #e0e0e0;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background 0.15s;
+}
+
+.btn:hover { background: #3a3a3a; }
+.btn.primary { background: #2563eb; border-color: #2563eb; color: #fff; }
+.btn.primary:hover { background: #1d4ed8; }
+.btn.success { background: #16a34a; border-color: #16a34a; color: #fff; }
+.btn.success:hover { background: #15803d; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ── Main content area ───────────────────────── */
+.main-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── 3D viewport ─────────────────────────────── */
+.viewport-container {
+  flex: 1;
+  position: relative;
+  background: #0a0a0a;
+  overflow: hidden;
+}
+
+.viewport-container canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.viewport-hint {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.6);
+  color: #aaa;
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  pointer-events: none;
+}
+
+/* ── Right sidebar ───────────────────────────── */
+.sidebar {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  background: #161616;
+  border-left: 1px solid #2a2a2a;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.sidebar-section {
+  padding: 12px;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.sidebar-section h2 {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+/* ── Camera list ─────────────────────────────── */
+.camera-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.camera-item {
+  border-radius: 6px;
+  border: 1px solid #2a2a2a;
+  margin-bottom: 6px;
+  background: #1e1e1e;
+  overflow: hidden;
+}
+
+.camera-item.selected {
+  border-color: #2563eb;
+}
+
+.camera-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.camera-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.camera-name {
+  flex: 1;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.camera-name-input {
+  flex: 1;
+  background: #111;
+  border: 1px solid #444;
+  border-radius: 3px;
+  color: #e0e0e0;
+  font-size: 12px;
+  padding: 2px 6px;
+}
+
+.camera-fov-badge {
+  font-size: 10px;
+  color: #888;
+  background: #111;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.camera-delete-btn {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  padding: 0 2px;
+}
+.camera-delete-btn:hover { color: #ff4444; }
+
+.camera-controls {
+  padding: 10px;
+  border-top: 1px solid #2a2a2a;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.control-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.control-row label {
+  width: 70px;
+  font-size: 11px;
+  color: #888;
+  flex-shrink: 0;
+}
+
+.control-row input[type="range"] {
+  flex: 1;
+  accent-color: #2563eb;
+}
+
+.control-row input[type="number"] {
+  width: 60px;
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 3px;
+  color: #e0e0e0;
+  font-size: 11px;
+  padding: 2px 6px;
+  text-align: right;
+}
+
+/* ── Timeline ────────────────────────────────── */
+.timeline {
+  padding: 8px 12px 6px;
+  background: #1a1a1a;
+  border-top: 1px solid #2a2a2a;
+  flex-shrink: 0;
+}
+
+.tl-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tl-time {
+  font-size: 11px;
+  color: #888;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  min-width: 72px;
+  flex-shrink: 0;
+}
+
+.tl-time-right { text-align: right; }
+
+.tl-unit { font-size: 10px; color: #555; }
+.tl-fmt  { font-size: 10px; color: #666; }
+
+/* ── Scrub bar (top row) ─────────────────────── */
+.scrub-bar {
+  flex: 1;
+  height: 18px;
+  background: #0d0d0d;
+  border: 1px solid #2a2a2a;
+  border-radius: 9px;
+  position: relative;
+  cursor: col-resize;
+  overflow: hidden;
+}
+
+/* filled track up to playhead */
+.scrub-bar::after {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: var(--scrub-pct, 0%);
+  background: #1e3a5f;
+  pointer-events: none;
+}
+
+.scrub-playhead {
+  position: absolute;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: #60a5fa;
+  border-radius: 2px;
+  transform: translateX(-1px);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.tl-bar-hint {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #3a3a3a;
+  pointer-events: none;
+}
+
+/* ── Segment bar (bottom row) ────────────────── */
+.seg-bar {
+  flex: 1;
+  height: 28px;
+  background: #0d0d0d;
+  border: 1px solid #2a2a2a;
+  border-radius: 4px;
+  position: relative;
+  cursor: crosshair;
+  overflow: hidden;
+}
+
+/* ── Export panel ────────────────────────────── */
+.export-panel {
+  padding: 12px;
+  background: #161616;
+  border-top: 1px solid #2a2a2a;
+  flex-shrink: 0;
+}
+
+.export-panel h2 {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.export-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.export-row label {
+  font-size: 11px;
+  color: #888;
+  width: 100px;
+  flex-shrink: 0;
+}
+
+.export-row input[type="number"] {
+  width: 70px;
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 3px;
+  color: #e0e0e0;
+  font-size: 11px;
+  padding: 3px 6px;
+}
+
+.export-row .path-display {
+  flex: 1;
+  font-size: 10px;
+  color: #777;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 3px;
+  padding: 4px 8px;
+}
+
+.export-result {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #4ade80;
+}
+
+.export-error {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #f87171;
+}
+
+/* ── Viewport + preview strip wrapper ───────── */
+.viewport-and-previews {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Camera thumbnail in sidebar ─────────────── */
+.camera-thumb-wrap {
+  cursor: pointer;
+  line-height: 0;
+}
+
+.camera-thumb {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.camera-thumb-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 54px;
+  background: #111;
+  color: #444;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: #aaa;
+  cursor: pointer;
+}
+
+/* ── Camera preview strip ─────────────────────── */
+.preview-strip {
+  flex-shrink: 0;
+  background: #111;
+  border-top: 1px solid #2a2a2a;
+}
+
+.preview-strip-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 12px;
+  font-size: 11px;
+  color: #666;
+  cursor: pointer;
+  user-select: none;
+}
+.preview-strip-header:hover { color: #aaa; }
+
+.preview-strip-toggle {
+  font-size: 9px;
+}
+
+.preview-strip-row {
+  display: flex;
+  gap: 6px;
+  padding: 6px 10px 8px;
+  overflow-x: auto;
+}
+
+.preview-strip-item {
+  flex-shrink: 0;
+  width: 120px;
+  border: 1px solid #2a2a2a;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #1a1a1a;
+  transition: border-color 0.12s;
+}
+.preview-strip-item:hover { border-color: #555; }
+.preview-strip-item.selected { border-width: 2px; }
+
+.preview-strip-item img {
+  width: 100%;
+  height: 68px;
+  object-fit: cover;
+  display: block;
+}
+
+.preview-strip-placeholder {
+  width: 100%;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #444;
+  font-size: 10px;
+  background: #111;
+}
+
+.preview-strip-label {
+  padding: 3px 5px;
+  font-size: 10px;
+  color: #aaa;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: #161616;
+}
+
+/* ── Segment blocks ──────────────────────────── */
+.seg-block {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  border: 2px solid transparent;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  cursor: grab;
+  overflow: hidden;
+  min-width: 8px;
+  box-sizing: border-box;
+}
+
+.seg-block:active { cursor: grabbing; }
+.seg-block.selected { z-index: 2; }
+
+.seg-handle {
+  width: 6px;
+  height: 100%;
+  flex-shrink: 0;
+  cursor: ew-resize;
+  background: rgba(0,0,0,0.3);
+  position: absolute;
+  top: 0;
+}
+
+.seg-handle-left { left: 0; border-radius: 3px 0 0 3px; }
+.seg-handle-right { right: 0; border-radius: 0 3px 3px 0; }
+
+.seg-label {
+  flex: 1;
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 4px;
+  pointer-events: none;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+
+.seg-cam-badge {
+  font-size: 9px;
+  background: rgba(0,0,0,0.4);
+  color: rgba(255,255,255,0.8);
+  padding: 1px 4px;
+  border-radius: 3px;
+  margin-right: 8px;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+.seg-playhead {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: #60a5fa;
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 10;
+  transform: translateX(-1px);
+}
+
+/* ── Segment editor ──────────────────────────── */
+.segment-editor {
+  margin-top: 6px;
+  background: #1e1e1e;
+  border: 1px solid #2a2a2a;
+  border-radius: 4px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.seg-editor-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.seg-name-input {
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 3px;
+  color: #e0e0e0;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  width: 100%;
+}
+
+.seg-time-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.seg-time-row label {
+  font-size: 10px;
+  color: #888;
+}
+
+.seg-time-row input[type="number"] {
+  width: 70px;
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 3px;
+  color: #e0e0e0;
+  font-size: 11px;
+  padding: 2px 6px;
+}
+
+.seg-cameras { display: flex; flex-direction: column; }
+
+.seg-cameras-label {
+  font-size: 11px;
+  color: #888;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.seg-camera-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin-top: 4px;
+}
+
+.seg-camera-toggle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.seg-camera-toggle input[type="checkbox"] {
+  cursor: pointer;
+  accent-color: #2563eb;
+}
+
+.cam-color-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── Export segment summary ──────────────────── */
+.export-segment-summary {
+  background: #111;
+  border: 1px solid #2a2a2a;
+  border-radius: 4px;
+  padding: 8px;
+  margin-bottom: 8px;
+}
+
+.export-seg-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 0;
+}
+
+.export-seg-label {
+  font-size: 11px;
+  color: #ccc;
+  font-weight: 500;
+}
+
+::-webkit-scrollbar-track { background: #111; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #444; }
