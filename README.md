@@ -2,6 +2,8 @@
 
 A desktop app for separating and previewing spherical (360°) video footage from multiple cameras. Built with React, Three.js, and Tauri.
 
+![Screenshot](img/main.png)
+
 ## What it does
 
 You load in spherical video files from multiple cameras, scrub through a timeline, preview each camera feed in a grid, and export the segments you want. The 3D viewport lets you see the footage mapped onto a sphere so you can get a feel for how it all fits together spatially.
